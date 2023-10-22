@@ -20,19 +20,21 @@ import com.example.swim_todo.databinding.ActivityMainBinding;
 //TO-DO List application.
 
 //Remaining features:
-    //Display task list
-    //Add task to list
-    //Edit task from list
-    //Delete task from list
-    //Mark task as done
-    //Generate reminder for tasks To DO today or overdue via Android NotificationCompat
-    //Import an export tasks to text file
-    //Prioritize tasks
-    //Sort tasks by at least 3 criteria, eg: date added, due date, priority, task name, status
-    //Add attachment to tasks – photo, video (eg. from device camera),
-    //Remove attachment from task
-    //Display task attachments
+    //TODO: Display task list
+    //TODO: Add task to list
+    //TODO: Edit task from list
+    //TODO: Delete task from list
+    //TODO: Mark task as done
+    //TODO: Generate reminder for tasks To DO today or overdue via Android NotificationCompat
+    //TODO: Import an export tasks to text file
+    //TODO: Prioritize tasks
+    //TODO: Sort tasks by at least 3 criteria, eg: date added, due date, priority, task name, status
+    //TODO: Add attachment to tasks – photo, video (eg. from device camera),
+    //TODO: Remove attachment from task
+    //TODO: Display task attachments
 
+//Additional resources used:
+    //Icons:    https://fonts.google.com/icons
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,11 +49,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+        binding.appBarMain.addtask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //TODO: Display add fragment
+
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //.setAction("Action", null).show();
             }
         });
         DrawerLayout drawer = binding.drawerLayout;

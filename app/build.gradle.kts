@@ -4,7 +4,9 @@ plugins {
 
 android {
     namespace = "com.example.swim_todo"
-    compileSdk = 33
+    //For compatibility reasons Dependency 'androidx.activity:activity:1.8.0' requires libraries and applications that depend on it to compile against version 34 or later of the Android APIs.
+    //After change click: File > Sync project with gradle files (as per https://stackoverflow.com/questions/72448223/android-studio-error-cannot-find-runner-for-app )
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.swim_todo"
