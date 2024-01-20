@@ -10,22 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.swim_todo.databinding.FragmentSlideshowBinding;
+import com.example.swim_todo.databinding.FragmentTasklistBinding;
 
-public class SlideshowFragment extends Fragment {
+public class TasklistFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentTasklistBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        TasklistViewModel tasklistViewModel =
+                new ViewModelProvider(this).get(TasklistViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentTasklistBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

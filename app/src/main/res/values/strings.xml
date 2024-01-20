@@ -7,13 +7,17 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Add task</string>
-    <string name="menu_gallery">Calendar</string>
-    <string name="menu_slideshow">Task list</string>
+    <string name="menu_addtask">Add task</string>
+    <string name="menu_calendar">Calendar</string>
+    <string name="menu_tasklist">Task list</string>
 
-    <string name="menu_home_button">Add</string>
-    <string name="menu_home_task_hint">Task name</string>
-    <string name="menu_home_task_text"></string>
-    <string name="menu_home_tags_hint">[tag1][tag2]</string>
-    <string name="menu_home_tags_text"></string>
+    <string name="addtask_button">Add</string>
+    <string name="addtask_task_hint">Task name</string>
+    <string name="addtask_task_text"></string>
+    <string name="addtask_tags_hint">[tag1][tag2]</string>
+    <string name="addtask_tags_text"></string>
+
+    <string name="calendar_text">Tasks overdue at specified date</string>
+
+    <string name="tasklist_text">Registered tasks</string>
 </resources>
