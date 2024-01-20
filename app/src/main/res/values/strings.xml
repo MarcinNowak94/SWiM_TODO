@@ -10,4 +10,10 @@
     <string name="menu_home">Add task</string>
     <string name="menu_gallery">Calendar</string>
     <string name="menu_slideshow">Task list</string>
+
+    <string name="menu_home_button">Add</string>
+    <string name="menu_home_task_hint">Task name</string>
+    <string name="menu_home_task_text"></string>
+    <string name="menu_home_tags_hint">[tag1][tag2]</string>
+    <string name="menu_home_tags_text"></string>
 </resources>

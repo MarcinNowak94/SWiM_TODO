@@ -35,6 +35,8 @@ import com.example.swim_todo.databinding.ActivityMainBinding;
 
 //Additional resources used:
     //Icons:    https://fonts.google.com/icons
+    //Example:  https://www.youtube.com/playlist?list=PLhhNsarqV6MQ59jOKACuCzASgBGMuR-km
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+        //Action for floating circle
         binding.appBarMain.addtask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
