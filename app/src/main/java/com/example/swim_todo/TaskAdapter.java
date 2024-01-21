@@ -1,5 +1,6 @@
 package com.example.swim_todo;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.swim_todo.ui.tasklist.EditTask;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -35,6 +40,24 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task task = taskList.get(position);
         holder.bind(task, fragment);
+
+        // Dodaj obsługę kliknięcia do otwierania fragmentu edycji
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Przekazanie zadania do fragmentu edycji
+                EditTask editTaskFragment = new EditTask();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("task", task);
+                editTaskFragment.setArguments(bundle);
+
+                //FIXME: Application crashes when changing fragment here
+                FragmentTransaction transaction = fragment.requireActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(fragment.requireView().getId(), editTaskFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
     }
 
     @Override

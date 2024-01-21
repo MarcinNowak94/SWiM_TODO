@@ -1,8 +1,9 @@
 package com.example.swim_todo;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class Task {
+public class Task implements Serializable {
     private long ID;
     private String name;
     private String tags;

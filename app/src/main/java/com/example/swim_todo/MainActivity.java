@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -20,13 +19,13 @@ import com.example.swim_todo.databinding.ActivityMainBinding;
 //TO-DO List application.
 
 //Remaining features:
-    //TODO: Display task list
-    //TODO: Add task to list
+    //DONE: Display task list
+    //DONE: Add task to list
     //TODO: Edit task from list
     //TODO: Delete task from list
     //TODO: Mark task as done
     //TODO: Generate reminder for tasks To DO today or overdue via Android NotificationCompat
-    //TODO: Import an export tasks to text file
+    //DONE: Import an export tasks to text file [done as DB]
     //TODO: Prioritize tasks
     //TODO: Sort tasks by at least 3 criteria, eg: date added, due date, priority, task name, status
     //TODO: Add attachment to tasks – photo, video (eg. from device camera),
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_addtask, R.id.nav_calendar, R.id.nav_tasklist)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

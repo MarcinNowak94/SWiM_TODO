@@ -18,6 +18,8 @@ import com.example.swim_todo.databinding.FragmentAddtaskBinding;
 import com.example.swim_todo.TaskDatabaseHelper;                //Communication with DB
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Calendar;
+
 public class AddTaskFragment extends Fragment {
 
     private FragmentAddtaskBinding binding;
@@ -26,6 +28,7 @@ public class AddTaskFragment extends Fragment {
     private EditText addTaskTagsText;
     private CalendarView calendarView;
     private TaskDatabaseHelper dbHelper;
+    private long dueDate;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +45,18 @@ public class AddTaskFragment extends Fragment {
 
         dbHelper = new TaskDatabaseHelper(getActivity());
 
-        //Date returned in epochtime(ms)
-        long dueDate = calendarView.getDate();
+        // Set the initial dueDate to the current date
+        dueDate = System.currentTimeMillis();
+
+        // Set up a listener to capture the selected date
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar selectedCalendar = Calendar.getInstance();
+                selectedCalendar.set(year, month, dayOfMonth);
+                dueDate = selectedCalendar.getTimeInMillis();
+            }
+        });
 
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +65,8 @@ public class AddTaskFragment extends Fragment {
                 String taskTags = addTaskTagsText.getText().toString();
                 String priority = "Low"; //TODO: Add list in UI: Low, Medium, High, Critical
                 Boolean isDone = false;
+                //FIXME: Returns current date instead of chosen
+                //long dueDate = calendarView.getDate(); //Date returned in epochtime(ms)
 
                 if (!taskText.isEmpty()) {
                     long rowId = dbHelper.insertTask(taskText, dueDate, priority, taskTags, isDone);

@@ -10,6 +10,7 @@
     <string name="menu_addtask">Add task</string>
     <string name="menu_calendar">Calendar</string>
     <string name="menu_tasklist">Task list</string>
+    <string name="menu_edittask">Edit task</string>
 
     <string name="addtask_button">Add</string>
     <string name="addtask_task_hint">Task name</string>
@@ -20,4 +21,9 @@
     <string name="calendar_text">Tasks overdue at specified date</string>
 
     <string name="tasklist_text">Registered tasks</string>
+
+    <string name="edittask_text">Task name</string>
+    <string name="edittask_tags">Task name</string>
+    <string name="edittask_button">Save edit</string>
+
 </resources>

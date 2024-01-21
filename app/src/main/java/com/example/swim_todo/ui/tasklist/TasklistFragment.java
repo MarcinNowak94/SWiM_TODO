@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.swim_todo.TaskDatabaseHelper;
 import com.example.swim_todo.databinding.FragmentTasklistBinding;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import java.util.List;
 public class TasklistFragment extends Fragment {
 
     private FragmentTasklistBinding binding;
-    private List<Task> taskList = new ArrayList<>();
     private TaskAdapter taskAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,10 +32,8 @@ public class TasklistFragment extends Fragment {
 
         binding = FragmentTasklistBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        // Inicjalizacja przykładowych danych
-        taskList.add(new Task(1, "Zadanie 1", "Tagi 1", "Wysoki", System.currentTimeMillis(), false, null));
-        taskList.add(new Task(2, "Zadanie 2", "Tagi 2", "Średni", System.currentTimeMillis(), true, null));
-        // Dodaj więcej zadań, jeżeli to konieczne
+        TaskDatabaseHelper dbHelper = new TaskDatabaseHelper(getActivity());
+        List<Task> taskList = dbHelper.getAllTasks();
 
         // Inicjalizacja RecyclerView i adaptera
         RecyclerView recyclerView = binding.tasklist;

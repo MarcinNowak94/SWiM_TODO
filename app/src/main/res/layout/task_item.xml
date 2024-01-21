@@ -9,10 +9,10 @@
         android:id="@+id/taskNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginEnd="8dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/taskTagsTextView"

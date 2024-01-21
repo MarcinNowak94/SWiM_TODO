@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 //Done with aid from https://chat.openai.com
 
@@ -101,35 +103,85 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getAllTasks() {
+    public List<Task> getAllTasks() {
+        List<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
 
-        //Convert Date from SQLITE String format to application epochtime in ms format
+        int columnIndexId = cursor.getColumnIndex(COLUMN_ID);
+        int columnIndexText = cursor.getColumnIndex(COLUMN_TASK_TEXT);
         int columnIndexDueDate = cursor.getColumnIndex(COLUMN_TASK_DUEDATE);
-        if (columnIndexDueDate != -1) {
-            while (cursor.moveToNext()) {
-                //
-                long dueDateInMillis = convertDateToms(cursor.getString(columnIndexDueDate));
-            }
+        int columnIndexPriority = cursor.getColumnIndex(COLUMN_TASK_PRIORITY);
+        int columnIndexTags = cursor.getColumnIndex(COLUMN_TASK_TAGS);
+        int columnIndexIsDone = cursor.getColumnIndex(COLUMN_TASK_ISDONE);
+
+        while (cursor.moveToNext()) {
+            long id = cursor.getLong(columnIndexId);
+            String text = cursor.getString(columnIndexText);
+            // Convert Date from SQLITE String format to application epochtime in ms format
+            long dueDateInMillis = convertDateToms(cursor.getString(columnIndexDueDate));
+            String priority = cursor.getString(columnIndexPriority);
+            String tags = cursor.getString(columnIndexTags);
+            boolean isDone = cursor.getInt(columnIndexIsDone) == 1;
+
+            Task task = new Task(id, text, tags, priority, dueDateInMillis, isDone, null);
+            taskList.add(task);
         }
 
-        return cursor;
-    };
+        cursor.close();
+        return taskList;
+    }
 
-    public int updateTask(long taskId, long dueDate, String taskText, String taskTags, String taskPriority, boolean isDone) {
-        String dueDateFormatted = convertDateToISO(dueDate);
+    public Task getTask(long taskId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                null,
+                COLUMN_ID + " = ?",
+                new String[]{String.valueOf(taskId)},
+                null,
+                null,
+                null
+        );
+
+        Task task = null;
+
+        int columnIndexId = cursor.getColumnIndex(COLUMN_ID);
+        int columnIndexText = cursor.getColumnIndex(COLUMN_TASK_TEXT);
+        int columnIndexDueDate = cursor.getColumnIndex(COLUMN_TASK_DUEDATE);
+        int columnIndexPriority = cursor.getColumnIndex(COLUMN_TASK_PRIORITY);
+        int columnIndexTags = cursor.getColumnIndex(COLUMN_TASK_TAGS);
+        int columnIndexIsDone = cursor.getColumnIndex(COLUMN_TASK_ISDONE);
+
+        if (cursor.moveToFirst()) {
+            long id = cursor.getLong(columnIndexId);
+            String text = cursor.getString(columnIndexText);
+            // Convert Date from SQLITE String format to application epochtime in ms format
+            long dueDateInMillis = convertDateToms(cursor.getString(columnIndexDueDate));
+            String priority = cursor.getString(columnIndexPriority);
+            String tags = cursor.getString(columnIndexTags);
+            boolean isDone = cursor.getInt(columnIndexIsDone) == 1;
+
+            task = new Task(id, text, tags, priority, dueDateInMillis, isDone, null);
+        }
+
+        cursor.close();
+        return task;
+    }
+
+    public int updateTask(Task task) {
+        String dueDateFormatted = convertDateToISO(task.getDueDate());
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TASK_TEXT, taskText);
+        values.put(COLUMN_TASK_TEXT, task.getName());
         values.put(COLUMN_TASK_DUEDATE, dueDateFormatted);
-        values.put(COLUMN_TASK_TAGS, taskTags);
-        values.put(COLUMN_TASK_PRIORITY, taskPriority);
-        values.put(COLUMN_TASK_ISDONE, isDone);
+        values.put(COLUMN_TASK_TAGS, task.getTags());
+        values.put(COLUMN_TASK_PRIORITY, task.getPriority());
+        values.put(COLUMN_TASK_ISDONE, task.isDone() ? 1 : 0);
 
         try {
-            return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(taskId)});
+            return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(task.getID())});
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;

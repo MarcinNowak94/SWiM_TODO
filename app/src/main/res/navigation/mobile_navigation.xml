@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_gallery">
+    app:startDestination="@+id/nav_calendar">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_addtask"
         android:name="com.example.swim_todo.ui.addtask.AddTaskFragment"
         android:label="@string/menu_addtask"
         tools:layout="@layout/fragment_addtask" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_calendar"
         android:name="com.example.swim_todo.ui.calendar.CalendarFragment"
         android:label="@string/menu_calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_tasklist"
         android:name="com.example.swim_todo.ui.tasklist.TasklistFragment"
         android:label="@string/menu_tasklist"
         tools:layout="@layout/fragment_tasklist" />
