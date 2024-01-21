@@ -1,4 +1,4 @@
-package com.example.swim_todo.ui.slideshow;
+package com.example.swim_todo.ui.tasklist;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

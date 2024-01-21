@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.swim_todo.ui.gallery.CalendarFragment"
+        android:name="com.example.swim_todo.ui.calendar.CalendarFragment"
         android:label="@string/menu_calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.swim_todo.ui.slideshow.TasklistFragment"
+        android:name="com.example.swim_todo.ui.tasklist.TasklistFragment"
         android:label="@string/menu_tasklist"
         tools:layout="@layout/fragment_tasklist" />
 </navigation>

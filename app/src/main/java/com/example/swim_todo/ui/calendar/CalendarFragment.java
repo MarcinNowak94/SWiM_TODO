@@ -1,4 +1,4 @@
-package com.example.swim_todo.ui.gallery;
+package com.example.swim_todo.ui.calendar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
