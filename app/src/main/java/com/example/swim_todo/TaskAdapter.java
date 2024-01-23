@@ -8,18 +8,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.swim_todo.ui.tasklist.EditTask;
+import com.example.swim_todo.ui.edittask.EditTask;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-
     private List<Task> taskList;
     private final Fragment fragment;
 
@@ -41,24 +39,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         Task task = taskList.get(position);
         holder.bind(task, fragment);
 
-        // Dodaj obsługę kliknięcia do otwierania fragmentu edycji
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Przekazanie zadania do fragmentu edycji
                 EditTask editTaskFragment = new EditTask();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("task", task);
+                bundle.putSerializable("taskID", task.getID());
                 editTaskFragment.setArguments(bundle);
 
-                //FIXME: Application crashes when changing fragment here
                 FragmentTransaction transaction = fragment.requireActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(fragment.requireView().getId(), editTaskFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+
+                if (!editTaskFragment.isAdded()) {
+                    //FIXME: Switch to EditTask fragment - fragment stays on screen permamently
+                    transaction.replace(R.id.nav_host_fragment_content_main, editTaskFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -71,6 +71,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
+        private final TextView taskIDTextView;
         private final TextView taskNameTextView;
         private final TextView taskTagsTextView;
         private final TextView taskPriorityTextView;
@@ -79,14 +80,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
+            taskIDTextView = itemView.findViewById(R.id.taskIDTextView);
             taskNameTextView = itemView.findViewById(R.id.taskNameTextView);
             taskTagsTextView = itemView.findViewById(R.id.taskTagsTextView);
             taskPriorityTextView = itemView.findViewById(R.id.taskPriorityTextView);
             taskDueDateTextView = itemView.findViewById(R.id.taskDueDateTextView);
             taskIsDoneTextView = itemView.findViewById(R.id.taskIsDoneTextView);
+
         }
 
         public void bind(Task task, Fragment fragment) {
+            taskIDTextView.setText(String.valueOf(task.getID()));
             taskNameTextView.setText(task.getName());
             taskTagsTextView.setText(task.getTags());
             taskPriorityTextView.setText(task.getPriority());
@@ -97,8 +101,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
             String isDoneText = task.isDone() ? "Done" : "Not Done";
             taskIsDoneTextView.setText(isDoneText);
-
-            // Dodaj inne pola, jeżeli to konieczne
         }
     }
 }

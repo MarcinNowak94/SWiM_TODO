@@ -20,7 +20,7 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     private static final String TABLE_NAME = "tasks";
 
-    // Nazwy kolumn w tabeli
+    //Columns
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_TASK_TEXT = "task_text";
     private static final String COLUMN_TASK_TAGS = "task_tags";
@@ -63,7 +63,7 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Inicjalizacja tabeli
+        //Table initialization
         db.execSQL(CREATE_TABLE);
     }
 
@@ -154,7 +154,7 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         int columnIndexIsDone = cursor.getColumnIndex(COLUMN_TASK_ISDONE);
 
         if (cursor.moveToFirst()) {
-            long id = cursor.getLong(columnIndexId);
+            long id = taskId;
             String text = cursor.getString(columnIndexText);
             // Convert Date from SQLITE String format to application epochtime in ms format
             long dueDateInMillis = convertDateToms(cursor.getString(columnIndexDueDate));

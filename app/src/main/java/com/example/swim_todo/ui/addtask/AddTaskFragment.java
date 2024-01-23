@@ -65,8 +65,6 @@ public class AddTaskFragment extends Fragment {
                 String taskTags = addTaskTagsText.getText().toString();
                 String priority = "Low"; //TODO: Add list in UI: Low, Medium, High, Critical
                 Boolean isDone = false;
-                //FIXME: Returns current date instead of chosen
-                //long dueDate = calendarView.getDate(); //Date returned in epochtime(ms)
 
                 if (!taskText.isEmpty()) {
                     long rowId = dbHelper.insertTask(taskText, dueDate, priority, taskTags, isDone);
@@ -74,11 +72,10 @@ public class AddTaskFragment extends Fragment {
                     if (rowId != -1) {
                         Toast.makeText(getActivity(), "Task saved to database!", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Powiadomienie o niepowodzeniu zapisu
                         Toast.makeText(getActivity(), "Error saving task!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Taskname is empty!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Taskname cannot be empty!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
