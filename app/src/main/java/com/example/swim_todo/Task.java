@@ -18,7 +18,7 @@ public class Task implements Serializable {
             String tags,
             String priority,
             long dueDate,
-            boolean isDone,
+            Boolean isDone,
             File attachment) {
         this.ID = ID;
         this.name = name;
@@ -61,11 +61,11 @@ public class Task implements Serializable {
         this.priority = priority;
     }
 
-    public boolean isDone() {
+    public Boolean isDone() {
         return isDone;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(Boolean done) {
         isDone = done;
     }
 

@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,9 +28,11 @@ public class AddTaskFragment extends Fragment {
 
     private FragmentAddtaskBinding binding;
     private EditText addTaskText;
-    private Button addTaskButton;
     private EditText addTaskTagsText;
+    private Spinner addTaskPrioritySpinner;
+    private CheckBox addTaskisDoneCheckbox;
     private CalendarView calendarView;
+    private Button addTaskButton;
     private TaskDatabaseHelper dbHelper;
     private long dueDate;
 
@@ -41,16 +45,15 @@ public class AddTaskFragment extends Fragment {
         View root = binding.getRoot();
 
         addTaskText = root.findViewById(R.id.addtasktext);
+        addTaskTagsText=root.findViewById(R.id.addtasktags);
+        addTaskPrioritySpinner=root.findViewById(R.id.addtaskprioritySpinner);
+        addTaskisDoneCheckbox=root.findViewById(R.id.addTaskIsDoneCheckbox);
         calendarView = root.findViewById(R.id.addtaskduedate);
         addTaskButton = root.findViewById(R.id.addtaskbutton);
-        addTaskTagsText=root.findViewById(R.id.addtasktags);
-
         dbHelper = new TaskDatabaseHelper(getActivity());
 
         // Set the initial dueDate to the current date
         dueDate = System.currentTimeMillis();
-
-        // Set up a listener to capture the selected date
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -65,8 +68,8 @@ public class AddTaskFragment extends Fragment {
             public void onClick(View v) {
                 String taskText = addTaskText.getText().toString();
                 String taskTags = addTaskTagsText.getText().toString();
-                String priority = "Low"; //TODO: Add list in UI: Low, Medium, High, Critical
-                Boolean isDone = false;
+                String priority = addTaskPrioritySpinner.getSelectedItem().toString();
+                Boolean isDone = addTaskisDoneCheckbox.isChecked();
 
                 if (!taskText.isEmpty()) {
                     long rowId = dbHelper.insertTask(taskText, dueDate, priority, taskTags, isDone);

@@ -1,5 +1,6 @@
 package com.example.swim_todo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swim_todo.ui.edittask.EditTask;
@@ -102,6 +100,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
             String isDoneText = task.isDone() ? "Done" : "Not Done";
             taskIsDoneTextView.setText(isDoneText);
+            int backgroundColor = isDoneText.equals("Done") ? Color.GREEN : Color.TRANSPARENT;
+            taskIsDoneTextView.getRootView().setBackgroundColor(backgroundColor);
         }
     }
 }
