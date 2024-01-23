@@ -8,7 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swim_todo.ui.edittask.EditTask;
@@ -47,14 +51,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 bundle.putSerializable("taskID", task.getID());
                 editTaskFragment.setArguments(bundle);
 
-                FragmentTransaction transaction = fragment.requireActivity().getSupportFragmentManager().beginTransaction();
+                // Obtain a reference to the NavController
+                NavController navController = Navigation.findNavController(v);
 
-                if (!editTaskFragment.isAdded()) {
-                    //FIXME: Switch to EditTask fragment - fragment stays on screen permamently
-                    transaction.replace(R.id.nav_host_fragment_content_main, editTaskFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }
+                // Navigate to the EditTask fragment using the appropriate action
+                navController.navigate(R.id.action_nav_tasklist_to_nav_edit_task, bundle);
             }
         });
     }

@@ -10,20 +10,21 @@
         android:id="@+id/addtasktext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="67dp"
-        android:text="@string/addtask_task_text"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="44dp"
         android:hint="@string/addtask_task_hint"
-        app:layout_constraintStart_toStartOf="@+id/addtasktags"
+        android:text="@string/addtask_task_text"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <MultiAutoCompleteTextView
         android:id="@+id/addtasktags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/addtask_tags_text"
+        android:layout_marginTop="12dp"
         android:hint="@string/addtask_tags_hint"
-        app:layout_constraintStart_toStartOf="@+id/addtaskduedate"
+        android:text="@string/addtask_tags_text"
+        app:layout_constraintStart_toStartOf="@+id/addtasktext"
         app:layout_constraintTop_toBottomOf="@+id/addtasktext" />
 
     <CalendarView
@@ -31,8 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginBottom="112dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/addtaskbutton"
         app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -40,11 +40,9 @@
         android:id="@+id/addtaskbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/addtask_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/addtaskduedate"
-        app:layout_constraintTop_toBottomOf="@+id/addtaskduedate"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/addtaskduedate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.swim_todo.databinding.FragmentAddtaskBinding;
 import com.example.swim_todo.TaskDatabaseHelper;                //Communication with DB
@@ -77,6 +79,12 @@ public class AddTaskFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Taskname cannot be empty!", Toast.LENGTH_SHORT).show();
                 }
+
+                // Obtain a reference to the NavController
+                NavController navController = Navigation.findNavController(v);
+
+                // Navigate to the EditTask fragment using the appropriate action
+                navController.navigate(R.id.action_nav_addtask_to_nav_tasklist);
             }
         });
         return root;

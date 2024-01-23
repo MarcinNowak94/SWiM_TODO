@@ -11,6 +11,10 @@
         android:label="@string/menu_addtask"
         tools:layout="@layout/fragment_addtask" />
 
+    <action
+        android:id="@+id/action_nav_addtask_to_nav_tasklist"
+        app:destination="@id/nav_tasklist" />
+
     <fragment
         android:id="@+id/nav_calendar"
         android:name="com.example.swim_todo.ui.calendar.CalendarFragment"
@@ -21,5 +25,25 @@
         android:id="@+id/nav_tasklist"
         android:name="com.example.swim_todo.ui.tasklist.TasklistFragment"
         android:label="@string/menu_tasklist"
-        tools:layout="@layout/fragment_tasklist" />
+        tools:layout="@layout/fragment_tasklist">
+
+        <!-- Define an action to navigate to EditTask -->
+        <action
+            android:id="@+id/action_nav_tasklist_to_nav_edit_task"
+            app:destination="@id/nav_edittask" />
+    </fragment>
+
+    <!-- Define the EditTask fragment -->
+    <fragment
+        android:id="@+id/nav_edittask"
+        android:name="com.example.swim_todo.ui.edittask.EditTask"
+        android:label="@string/menu_edittask"
+        tools:layout="@layout/fragment_edit_task">
+
+        <!-- Define an action to navigate back to TasklistFragment -->
+        <action
+            android:id="@+id/action_nav_edit_task_to_nav_tasklist"
+            app:destination="@id/nav_tasklist" />
+    </fragment>
+
 </navigation>

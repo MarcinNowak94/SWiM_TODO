@@ -38,7 +38,7 @@ public class TasklistFragment extends Fragment {
         // Inicjalizacja RecyclerView i adaptera
         RecyclerView recyclerView = binding.tasklist;
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        taskAdapter = new TaskAdapter(taskList, this);
+        taskAdapter = new TaskAdapter(taskList, this.getParentFragment());
         recyclerView.setAdapter(taskAdapter);
 
         return root;
