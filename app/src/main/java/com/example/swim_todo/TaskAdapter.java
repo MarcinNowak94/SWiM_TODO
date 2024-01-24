@@ -16,15 +16,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.swim_todo.ui.edittask.EditTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     private List<Task> taskList;
+    private List<Task> originalTaskList; // Lista do przechowywania oryginalnych danych
     private final Fragment fragment;
+    private boolean showUndoneOnly = false; // Flaga dla filtrowania
 
     public TaskAdapter(List<Task> taskList, Fragment fragment) {
         this.taskList = taskList;
+        this.originalTaskList = new ArrayList<>(taskList);
         this.fragment = fragment;
     }
 
@@ -49,15 +56,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 bundle.putSerializable("taskID", task.getID());
                 editTaskFragment.setArguments(bundle);
 
-                // Obtain a reference to the NavController
+                // Get NavController and navigate to the EditTask fragment via action
                 NavController navController = Navigation.findNavController(v);
-
-                // Navigate to the EditTask fragment using the appropriate action
                 navController.navigate(R.id.action_nav_tasklist_to_nav_edit_task, bundle);
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -66,6 +70,70 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public void setTasks(List<Task> tasks) {
         this.taskList = tasks;
+        this.originalTaskList = new ArrayList<>(tasks);
+        notifyDataSetChanged();
+    }
+
+    public void showUndoneOnly(boolean showUndone) {
+        this.showUndoneOnly = showUndone;
+        applyFilter();
+    }
+
+    public void sortByName(boolean ascending) {
+        Collections.sort(taskList, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return ascending ? t1.getName().compareTo(t2.getName()) :
+                        t2.getName().compareTo(t1.getName());
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    public void sortByTags(boolean ascending) {
+        Collections.sort(taskList, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return ascending ? t1.getTags().compareTo(t2.getTags()) :
+                        t2.getTags().compareTo(t1.getTags());
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    public void sortByPriority(boolean ascending) {
+        Collections.sort(taskList, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return ascending ? t1.getPriority().compareTo(t2.getPriority()) :
+                        t2.getPriority().compareTo(t1.getPriority());
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    public void sortByDueDate(boolean ascending) {
+        Collections.sort(taskList, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                if (ascending) {
+                    return Long.compare(t1.getDueDate(), t2.getDueDate());
+                } else {
+                    return Long.compare(t2.getDueDate(), t1.getDueDate());
+                }
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    private void applyFilter() {
+        if (showUndoneOnly) {
+            taskList = originalTaskList.stream()
+                    .filter(task -> !task.isDone())
+                    .collect(Collectors.toList());
+        } else {
+            taskList = new ArrayList<>(originalTaskList);
+        }
         notifyDataSetChanged();
     }
 
@@ -85,7 +153,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             taskPriorityTextView = itemView.findViewById(R.id.taskPriorityTextView);
             taskDueDateTextView = itemView.findViewById(R.id.taskDueDateTextView);
             taskIsDoneTextView = itemView.findViewById(R.id.taskIsDoneTextView);
-
         }
 
         public void bind(Task task, Fragment fragment) {

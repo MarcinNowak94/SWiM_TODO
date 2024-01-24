@@ -6,4 +6,11 @@
         <item>High</item>
         <item>Critical</item>
     </string-array>
+
+    <string-array name="sort_options">
+        <item>Name</item>
+        <item>Tags</item>
+        <item>Priority</item>
+        <item>Due Date</item>
+    </string-array>
 </resources>

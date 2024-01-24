@@ -19,8 +19,8 @@ import com.example.swim_todo.databinding.ActivityMainBinding;
 //TO-DO List application. Grades:
     //Grade Requirements DONE (x/12)
     //3     5
-    //3,5   7   <-We are here
-    //4     8
+    //3,5   7
+    //4     8   <-We are here
     //4,5   9
     //5     12
 
@@ -33,7 +33,7 @@ import com.example.swim_todo.databinding.ActivityMainBinding;
     //TODO: Generate reminder for tasks To DO today or overdue via Android NotificationCompat
     //DONE: Import an export tasks to text file [done as DB]
     //DONE: Prioritize tasks
-    //TODO: Sort tasks by at least 3 criteria, eg: date added, due date, priority, task name, status
+    //DONE: Sort tasks by at least 3 criteria, eg: date added, due date, priority, task name, status
     //TODO: Add attachment to tasks – photo, video (eg. from device camera),
     //TODO: Remove attachment from task
     //TODO: Display task attachments
