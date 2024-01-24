@@ -83,10 +83,8 @@ public class AddTaskFragment extends Fragment {
                     Toast.makeText(getActivity(), "Taskname cannot be empty!", Toast.LENGTH_SHORT).show();
                 }
 
-                // Obtain a reference to the NavController
+                // Get NavController and navigate to EditTask fragment using action
                 NavController navController = Navigation.findNavController(v);
-
-                // Navigate to the EditTask fragment using the appropriate action
                 navController.navigate(R.id.action_nav_addtask_to_nav_tasklist);
             }
         });

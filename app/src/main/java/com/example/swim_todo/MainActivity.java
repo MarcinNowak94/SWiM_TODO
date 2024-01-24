@@ -40,7 +40,6 @@ import com.example.swim_todo.databinding.ActivityMainBinding;
 
 //Additional resources used:
     //Icons:    https://fonts.google.com/icons
-    //Example:  https://www.youtube.com/playlist?list=PLhhNsarqV6MQ59jOKACuCzASgBGMuR-km
 
 
 public class MainActivity extends AppCompatActivity {

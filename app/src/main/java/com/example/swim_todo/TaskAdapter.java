@@ -25,9 +25,9 @@ import java.util.stream.Collectors;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     private List<Task> taskList;
-    private List<Task> originalTaskList; // Lista do przechowywania oryginalnych danych
+    private List<Task> originalTaskList; //Unfiltered tasklist
     private final Fragment fragment;
-    private boolean showUndoneOnly = false; // Flaga dla filtrowania
+    private boolean showUndoneOnly = false;
 
     public TaskAdapter(List<Task> taskList, Fragment fragment) {
         this.taskList = taskList;

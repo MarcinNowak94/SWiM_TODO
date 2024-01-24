@@ -41,11 +41,9 @@ public class TasklistFragment extends Fragment {
         TaskDatabaseHelper dbHelper = new TaskDatabaseHelper(getActivity());
         List<Task> taskList = dbHelper.getAllTasks();
 
-        // Inicjalizacja widoków
         sortSpinner = binding.sortSpinner;
         doneCheckBox = binding.doneCheckBox;
 
-        // Inicjalizacja adaptera do sortowania
         ArrayAdapter<CharSequence> sortAdapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.sort_options,
@@ -54,24 +52,19 @@ public class TasklistFragment extends Fragment {
         sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortAdapter);
 
-        // Inicjalizacja adaptera dla RecyclerView
         RecyclerView recyclerView = binding.tasklist;
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         taskAdapter = new TaskAdapter(taskList, this.getParentFragment());
         recyclerView.setAdapter(taskAdapter);
 
-        // Obsługa zdarzenia dla CheckBox
         doneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Wywołaj metodę do aktualizacji filtru
             taskAdapter.showUndoneOnly(isChecked);
         });
 
-        // Obsługa zdarzenia dla Spinner
         sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Wywołaj metodę do sortowania na podstawie wybranej opcji
-                boolean ascending = true; // ustaw na true lub false w zależności od potrzeb
+                boolean ascending = true;
                 switch (position) {
                     case 0:
                         taskAdapter.sortByName(ascending);
@@ -85,13 +78,12 @@ public class TasklistFragment extends Fragment {
                     case 3:
                         taskAdapter.sortByDueDate(ascending);
                         break;
-                    // Dodaj więcej przypadków w razie dodania kolejnych opcji sortowania
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Nie robimy nic, gdy nic nie jest wybrane w Spinnerze
+                //Do nothing while nothing selected
             }
         });
 

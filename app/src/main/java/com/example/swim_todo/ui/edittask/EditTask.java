@@ -155,11 +155,9 @@ public class EditTask extends Fragment {
     }
 
     private void deleteTask() {
-        // Perform the deletion of the task
         dbHelper.deleteTask(task.getID());
         Toast.makeText(getActivity(), "Task deleted!", Toast.LENGTH_SHORT).show();
 
-        // Navigate back to the TasklistFragment
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.action_nav_edit_task_to_nav_tasklist);
     }

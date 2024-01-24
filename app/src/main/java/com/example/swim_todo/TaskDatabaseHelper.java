@@ -74,7 +74,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Dodawanie zadania
     public long insertTask(
             String taskText,
             long dueDate,
@@ -193,7 +192,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
     public int deleteTask(long taskId) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
-            // Usunięcie wiersza o zadanym ID
             return db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{String.valueOf(taskId)});
         } catch (SQLException e) {
             e.printStackTrace();
