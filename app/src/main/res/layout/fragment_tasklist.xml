@@ -8,24 +8,52 @@
 
     <TextView
         android:id="@+id/tasklisttext"
-        android:layout_width="387dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="@dimen/width"
+        android:layout_height="@dimen/height"
+        android:layout_marginTop="@dimen/fab_margin"
         android:text="@string/tasklist_text"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/tasklistsorting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tasklisttext"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/sortSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/fab_margin"
+            app:layout_constraintTop_toBottomOf="@+id/tasklisttext"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginStart="8dp" />
+
+        <CheckBox
+            android:id="@+id/doneCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Done"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tasklist"
-        android:layout_width="388dp"
-        android:layout_height="653dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:layout_marginTop="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tasklisttext"
+        app:layout_constraintTop_toBottomOf="@+id/tasklistsorting"
         app:layout_constraintVertical_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

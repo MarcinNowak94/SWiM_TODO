@@ -7,12 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.swim_todo.databinding.FragmentAddtaskBinding;
 import com.example.swim_todo.TaskDatabaseHelper;                //Communication with DB
@@ -24,9 +28,11 @@ public class AddTaskFragment extends Fragment {
 
     private FragmentAddtaskBinding binding;
     private EditText addTaskText;
-    private Button addTaskButton;
     private EditText addTaskTagsText;
+    private Spinner addTaskPrioritySpinner;
+    private CheckBox addTaskisDoneCheckbox;
     private CalendarView calendarView;
+    private Button addTaskButton;
     private TaskDatabaseHelper dbHelper;
     private long dueDate;
 
@@ -39,16 +45,15 @@ public class AddTaskFragment extends Fragment {
         View root = binding.getRoot();
 
         addTaskText = root.findViewById(R.id.addtasktext);
+        addTaskTagsText=root.findViewById(R.id.addtasktags);
+        addTaskPrioritySpinner=root.findViewById(R.id.addtaskprioritySpinner);
+        addTaskisDoneCheckbox=root.findViewById(R.id.addTaskIsDoneCheckbox);
         calendarView = root.findViewById(R.id.addtaskduedate);
         addTaskButton = root.findViewById(R.id.addtaskbutton);
-        addTaskTagsText=root.findViewById(R.id.addtasktags);
-
         dbHelper = new TaskDatabaseHelper(getActivity());
 
         // Set the initial dueDate to the current date
         dueDate = System.currentTimeMillis();
-
-        // Set up a listener to capture the selected date
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -63,8 +68,8 @@ public class AddTaskFragment extends Fragment {
             public void onClick(View v) {
                 String taskText = addTaskText.getText().toString();
                 String taskTags = addTaskTagsText.getText().toString();
-                String priority = "Low"; //TODO: Add list in UI: Low, Medium, High, Critical
-                Boolean isDone = false;
+                String priority = addTaskPrioritySpinner.getSelectedItem().toString();
+                Boolean isDone = addTaskisDoneCheckbox.isChecked();
 
                 if (!taskText.isEmpty()) {
                     long rowId = dbHelper.insertTask(taskText, dueDate, priority, taskTags, isDone);
@@ -77,6 +82,12 @@ public class AddTaskFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Taskname cannot be empty!", Toast.LENGTH_SHORT).show();
                 }
+
+                // Obtain a reference to the NavController
+                NavController navController = Navigation.findNavController(v);
+
+                // Navigate to the EditTask fragment using the appropriate action
+                navController.navigate(R.id.action_nav_addtask_to_nav_tasklist);
             }
         });
         return root;

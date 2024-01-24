@@ -11,43 +11,75 @@
 
     <EditText
         android:id="@+id/editTaskText"
-        android:layout_width="348dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="@dimen/width"
+        android:layout_height="@dimen/height"
+        android:layout_marginTop="@dimen/fab_margin"
         android:hint="@string/edittask_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <DatePicker
-        android:id="@+id/editTaskDatePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTaskButton"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskTags"
-        tools:layout_editor_absoluteX="16dp" />
-
     <EditText
         android:id="@+id/editTaskTags"
-        android:layout_width="346dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/width"
+        android:layout_height="@dimen/height"
+        android:layout_marginTop="@dimen/fab_margin"
         android:hint="@string/edittask_tags"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTaskText" />
+
+    <Spinner
+        android:id="@+id/editTaskPrioritySpinner"
+        android:layout_width="@dimen/width"
+        android:layout_height="@dimen/height"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:entries="@array/priority_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskTags" />
+
+    <CheckBox
+        android:id="@+id/editTaskIsDoneCheckbox"
+        android:layout_width="@dimen/width"
+        android:layout_height="@dimen/height"
+        android:layout_marginTop="16dp"
+        android:text="@string/edittask_checkbox_done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskPrioritySpinner" />
+
+
+    <DatePicker
+        android:id="@+id/editTaskDatePicker"
+        android:layout_width="@dimen/width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fab_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskIsDoneCheckbox" />
 
     <Button
         android:id="@+id/editTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/edittask_button"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:text="@string/edittask_button_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/editTaskDeleteTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:text="@string/edittask_button_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editTaskButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

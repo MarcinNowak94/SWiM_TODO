@@ -17,6 +17,7 @@
     <string name="addtask_task_text"></string>
     <string name="addtask_tags_hint">[tag1][tag2]</string>
     <string name="addtask_tags_text"></string>
+    <string name="addtask_isdone_checkbox">Done</string>
 
     <string name="calendar_text">Tasks overdue at specified date</string>
 
@@ -24,6 +25,10 @@
 
     <string name="edittask_text">Task name</string>
     <string name="edittask_tags">Task name</string>
-    <string name="edittask_button">Save edit</string>
+    <string name="edittask_checkbox_done">Done</string>
+    <string name="edittask_button_edit">Save edit</string>
+    <string name="edittask_button_delete">Delete task</string>
+
+
 
 </resources>

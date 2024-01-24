@@ -16,18 +16,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.swim_todo.databinding.ActivityMainBinding;
 
 //Requirements: https://www.tomaszx.pl/materialy/pum_projekt.pdf
-//TO-DO List application.
+//TO-DO List application. Grades:
+    //Grade Requirements DONE (x/12)
+    //3     5
+    //3,5   7
+    //4     8   <-We are here
+    //4,5   9
+    //5     12
 
 //Remaining features:
     //DONE: Display task list
     //DONE: Add task to list
-    //TODO: Edit task from list
-    //TODO: Delete task from list
-    //TODO: Mark task as done
+    //DONE: Edit task from list
+    //DONE: Delete task from list
+    //DONE: Mark task as done
     //TODO: Generate reminder for tasks To DO today or overdue via Android NotificationCompat
     //DONE: Import an export tasks to text file [done as DB]
-    //TODO: Prioritize tasks
-    //TODO: Sort tasks by at least 3 criteria, eg: date added, due date, priority, task name, status
+    //DONE: Prioritize tasks
+    //DONE: Sort tasks by at least 3 criteria, eg: date added, due date, priority, task name, status
     //TODO: Add attachment to tasks – photo, video (eg. from device camera),
     //TODO: Remove attachment from task
     //TODO: Display task attachments
@@ -38,7 +44,6 @@ import com.example.swim_todo.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
-
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_addtask, R.id.nav_calendar, R.id.nav_tasklist)
+                R.id.nav_addtask, R.id.nav_calendar, R.id.nav_tasklist, R.id.nav_edittask)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

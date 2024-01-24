@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="priority_array">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Critical</item>
+    </string-array>
+
+    <string-array name="sort_options">
+        <item>Name</item>
+        <item>Tags</item>
+        <item>Priority</item>
+        <item>Due Date</item>
+    </string-array>
+</resources>
